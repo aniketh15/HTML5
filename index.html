@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Audio Player</title>
+        <style>
+            body{
+                font-family: sans-serif;
+            }
+            audio{
+                margin: 30px 200px;
+            }
+            #playlist{
+                list-style: none;
+                text-align: center
+            }
+            #playlist li a{
+                color: black;
+                text-decoration: none;
+                font-size: 40px;
+            }
+        </style>
+    </head>
+    <body>
+        <audio src="" controls id="aud">Sorry your browser does not support audios!</audio>
+        <ul id="playlist">
+            <li class="current"><a href="2-06%20Infinity%202008.mp3">Infinity</a></li>
+            <li class="current"><a href="8_Avicii_-_Wake_Me_Up.mp3">Wake me up</a></li>
+            <li class="current"><a href="8_Bruno_Mars_-_Locked_Out_Of_Heaven.mp3">Locked out of heaven</a></li>
+            <li class="current"><a href="8_Calvin_Harris_-_I_Need_Your_Love.mp3">I need your love</a></li>
+            <li class="current"><a href="18752-count-on-me-bruno-mars--1411570065.mp3">Count on me</a></li>
+            <li class="current"><a href="22651-paradise-coldplay--1411571181.mp3">Paradise</a></li>
+            <li class="current"><a href="24337-feel-again-onerepublic--1411571652.mp3">Feel again</a></li>
+            <li class="current"><a href="39753-one-thing-one-direction--1411576568.mp3">One thing</a></li>
+        </ul>
+        <script src="https://code.jquery.com/jquery-2.2.0.js"></script>
+        <script>
+            audioPlayer();
+            function audioPlayer(){
+                var currentSong=0;
+                $("#aud")[0].src=$("#playlist li a")[0];
+                $("#aud")[0].play();
+                $("#playlist li a").click(function(e){
+                    e.preventDefault();
+                    $("#aud")[0].src=this;
+                    $("#aud")[0].play();
+                    currentSong=$(this).parent().index();
+                });
+                $("#aud")[0].addEventListener("ended",function(){
+                   currentSong++;
+                    if(currentSong== $("#playlist li a").length)
+                        currentSong=0;
+                    $("#aud")[0].src=$("#playlist li a")[currentSong].href;
+                    $("#aud")[0].play();
+                });
+            }
+        </script>
+    </body>
+</html>
